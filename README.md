@@ -18,7 +18,36 @@
 ## Example Use
 1. `roslaunch simulation both.launch`
 
-## `simulation` package explained
+## `px4`/`Firmware` Package Explained
+1. This is the code that is running on the FCU.
+
+## `mavlink` Package Explained
+1. This is the intermidiate layer between the `px4` and `mavros`.
+
+## `mavros` Package Explained
+1. This is what you should use to communicate with the UAV.
+2. Here is a list of some of the most interesting topics:
+
+    | Filename               | Use           |
+    | ---------------------- |:--------------|
+    | `/mavros/distance_sensor/teraranger` | Get the distance measure from the TeraRanger. |
+    | `/mavros/imu/data`                   | Get IMU data. |
+    | `/mavros/local_position/odom`        | Get pose of UAV and velocity in UAV frame. |
+    | `/mavros/local_position/pose`        | Get pose of the UAV. |
+    | `/mavros/local_position/velocity`    | Get velocity in map frame. |
+    | `/mavros/mocap/pose`                 | Send your estimate of the pose of the UAV. |
+    | `/mavros/setpoint_raw/local`         | The prefered (by me) topic to publish positions, velocities, and accelerations to the UAV. From my experience you can only send one of the three at the same time. You can specify which frame the message is in, which makes it possible to give velocity in UAV frame instead of map frame. Only use the non-OFFSET frames, OFFSET is not working with `px4`. |
+    | `/mavros/setpoint_velocity/cmd_vel`  | Can be used to send velocities. But I prefer the above one instead since it is easier to switch to sending positions if you find that better later on. With the above you can also specify the frame, which you can not here. |
+    | `/mavros/setpoint_position/local`    | Can be used to send positions. Once again I prefer `/mavros/setpoint_raw/local` over this. |
+    
+3. Here is a list of some of the most interesting services:
+
+    | Filename               | Use           |
+    | ---------------------- |:--------------|
+    | `/mavros/cmd/arming`   | Used to arm/disarm the UAV. |
+    | `/mavros/set_mode`                   | Change between different mode. Use `offboard` to control it with the above topics. For it to stay in `offboard` you have to publish continously at a certain frequence, else it will go back to the mode it was in before going into `offboard`. You can use `land` when you want to land. |  
+
+## `simulation` Package Explained
 1. The folder `models` inside `simulation` contains Gazebo models. If you want, you can add more models in that folder and they will automatically show up in Gazebo.
 3. The folder `worlds` contains worlds...
 2. The folder `launch` contains a number of launch files and configuration files for PX4. We will go through each file in the table:
