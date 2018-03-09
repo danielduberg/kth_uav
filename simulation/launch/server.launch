@@ -4,12 +4,15 @@
   <arg name="headless" default="false"/>
   <arg name="gui" default="false"/>
 
-  <!--
-  <arg name="world" default="$(find simulation)/worlds/training.world"/>
-  -->
-  
   <arg name="sdf" default="$(find simulation)/models/uav/uav.sdf"/>
   
+  <!--
+  <arg name="world" value="worlds/empty.world"/>
+  -->
+  <arg name="world" default="$(find simulation)/worlds/building.world"/>
+  
+  <arg name="pluginlists_yaml" default="$(find simulation)/launch/px4_pluginlists.yaml" />
+  <arg name="config_yaml" default="$(find simulation)/launch/px4_config.yaml" />
   
   <arg name="debug" default="false"/>
   <arg name="verbose" default="true"/>
@@ -25,9 +28,10 @@
     <arg name="verbose" value="$(arg verbose)" />
     <arg name="paused" value="$(arg paused)" />
     
-    <!--
-    <arg name="world" value="$(arg world)" />
-    -->
     <arg name="sdf" value="$(arg sdf)" />
+    <arg name="world" value="$(arg world)" />
+    
+    <arg name="pluginlists_yaml" value="$(arg pluginlists_yaml)" />
+    <arg name="config_yaml" value="$(arg config_yaml)" />
   </include> 
 </launch>
