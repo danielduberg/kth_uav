@@ -16,7 +16,7 @@
 4. `source ~/.bashrc` or restart the terminal
 
 ## Package Explaination
-### `mavros` Package Explained
+### `mavros`
 1. This is what you should use to communicate with the UAV.
 2. Here is a list of some of the most interesting topics:
 
@@ -39,7 +39,7 @@
     | `/mavros/cmd/arming`   | Used to arm/disarm the UAV. |
     | `/mavros/set_mode`                   | Change between different mode. Use `offboard` to control it with the above topics. For it to stay in `offboard` you have to publish continously at a certain frequence, else it will go back to the mode it was in before going into `offboard`. You can use `land` when you want to land. |  
 
-### `simulation` Package Explained
+### `simulation`
 1. The folder `models` inside `simulation` contains Gazebo models. If you want, you can add more models in that folder and they will automatically show up in Gazebo.
 3. The folder `worlds` contains worlds...
 2. The folder `launch` contains a number of launch files and configuration files for PX4. We will go through each file in the table:
@@ -53,8 +53,8 @@
     | `px4_config.yaml`      | Config file for the PX4 where you can specify a bounch of fancy stuff. |
     | `px4_pluginlists.yaml` | In this file you can blacklist/whitelist different plugins used by PX4. |
     
-### `px4`/`Firmware` Package Explained
+### `px4`/`Firmware`
 1. This is the code that is running on the FCU.
 
-### `mavlink` Package Explained
+### `mavlink`
 1. This is the intermidiate layer between the `px4` and `mavros`.
