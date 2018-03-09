@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<launch>
+  <node pkg="rosservice" type="rosservice" name="arm_uav" args="call --wait /mavros/cmd/arming true" />
+
+  <node pkg="rosservice" type="rosservice" name="offboard_uav" args="call --wait /mavros/set_mode 0 'offboard'" />
+</launch>

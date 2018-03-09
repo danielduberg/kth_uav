@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<launch>
+	<node name="gazebo_client" pkg="gazebo_ros" type="gzclient">
+	    <env name="GAZEBO_IP" value="192.168.0.142" />
+	    <env name="GAZEBO_MASTER_URI" value="192.168.0.142:12345" />
+	</node>
+</launch>

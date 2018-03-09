@@ -1,0 +1,18 @@
+[submodule "mavros/mavros_extra"]
+	path = mavros/mavros_extra
+	url = https://github.com/mavlink/mavros-release.git
+[submodule "mavros/mavros"]
+	path = mavros/mavros
+	url = https://github.com/mavlink/mavros-release.git
+[submodule "mavros/libmavconn"]
+	path = mavros/libmavconn
+	url = https://github.com/mavlink/mavros-release.git
+[submodule "mavros/mavros_msgs"]
+	path = mavros/mavros_msgs
+	url = https://github.com/mavlink/mavros-release.git
+[submodule "Firmware"]
+	path = Firmware
+	url = https://github.com/PX4/Firmware.git
+[submodule "mavlink"]
+	path = mavlink
+	url = https://github.com/mavlink/mavlink-gbp-release.git
