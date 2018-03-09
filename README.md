@@ -5,26 +5,18 @@
 2. You are using `bash`
 3. You have installed `ros-kinetic-desktop-full` (otherwise follow this guide: [http://wiki.ros.org/kinetic/Installation/Ubuntu] and install `ros-kinetic-desktop-full`)
 4. You are using `catkin build` instead of `catkin_make`
+   1. If you have not used `catkin build` before, then read here: [http://catkin-tools.readthedocs.io/en/latest/verbs/catkin_build.html]
 
 ## Prerequisites
 
 ## Install Instructions
 1. Clone to your ROS workspace: `git clone https://github.com/danielduberg/kth_uav.git`
 2. Run `install.sh` (might have to `chmod +x install.sh` first)
-3. Close down Gazebo and you are done
+3. Close down Gazebo and `CTRL+c` the terminal
+4. `source ~/.bashrc` or restart the terminal
 
-## `px4`
-
-## Example Use
-1. `roslaunch simulation both.launch`
-
-## `px4`/`Firmware` Package Explained
-1. This is the code that is running on the FCU.
-
-## `mavlink` Package Explained
-1. This is the intermidiate layer between the `px4` and `mavros`.
-
-## `mavros` Package Explained
+## Package Explaination
+### `mavros` Package Explained
 1. This is what you should use to communicate with the UAV.
 2. Here is a list of some of the most interesting topics:
 
@@ -47,7 +39,7 @@
     | `/mavros/cmd/arming`   | Used to arm/disarm the UAV. |
     | `/mavros/set_mode`                   | Change between different mode. Use `offboard` to control it with the above topics. For it to stay in `offboard` you have to publish continously at a certain frequence, else it will go back to the mode it was in before going into `offboard`. You can use `land` when you want to land. |  
 
-## `simulation` Package Explained
+### `simulation` Package Explained
 1. The folder `models` inside `simulation` contains Gazebo models. If you want, you can add more models in that folder and they will automatically show up in Gazebo.
 3. The folder `worlds` contains worlds...
 2. The folder `launch` contains a number of launch files and configuration files for PX4. We will go through each file in the table:
@@ -60,3 +52,9 @@
     | `simulation.launch`    | Launches the simulator (both server and client). As with the `server.launch` you can in this file specify the model (UAV) and world to load by changing the arguments `sdf` and `world`, respectively. |
     | `px4_config.yaml`      | Config file for the PX4 where you can specify a bounch of fancy stuff. |
     | `px4_pluginlists.yaml` | In this file you can blacklist/whitelist different plugins used by PX4. |
+    
+### `px4`/`Firmware` Package Explained
+1. This is the code that is running on the FCU.
+
+### `mavlink` Package Explained
+1. This is the intermidiate layer between the `px4` and `mavros`.
