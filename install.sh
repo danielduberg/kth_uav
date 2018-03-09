@@ -11,7 +11,7 @@ addToBashrc() {
 }
 
 sudo apt-get update
-sudo apt-get install cmake3 python-pip python-rosinstall python-rosinstall-generator python-wstool build-essential python-catkin-tools
+sudo apt-get install cmake python-pip python-rosinstall python-rosinstall-generator python-wstool build-essential python-catkin-tools
 
 sudo apt-get update
 sudo apt-get install libprotobuf-dev libprotoc-dev protobuf-compiler libeigen3-dev gazebo7 libgazebo7-dev gstreamer1.0-* libgstreamer1.0-* libimage-exiftool-perl python-jinja2
