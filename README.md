@@ -16,6 +16,10 @@
 3. Close down Gazebo and `CTRL+c` the terminal
 4. `source ~/.bashrc` or restart the terminal
 
+## If you ever move `kth_uav` read this
+1. When you ran `install.sh` two lines where added to your `~/.bashrc` file. The first one starting with `# Load the kth_uav bash file`, and the second line sources a filed called `.bashrc` that is located inside `kth_uav`.
+2. If you move the `kth_uav`, you have to make a change to the second line that was added to your `~/.bashrc` file such that it points to the `.bashrc` inside `kth_uav`.
+
 ## Package Explaination
 ### `mavros`
 1. This is what you should use to communicate with the UAV.
