@@ -63,3 +63,48 @@
 
 ### `mavlink`
 1. This is the intermidiate layer between the `px4` and `mavros`.
+
+
+## Example Use
+### `/mavros/setpoint_raw/local`
+1. Example C++ code that is publishing velocities (and yaw rate) in UAV frame to the `/mavros/setpoint_raw/local` topic:
+```c++
+#include <ros/ros.h>
+#include <mavros_msgs/PositionTarget.h>
+
+int main(int argc, char** argv)
+{
+   ros::init(argc, argv, "controller");
+   ros::NodeHandle nh;
+   ros::Publisher pub = nh.advertise<mavros_msgs::PositionTarget>("mavros/setpoint_raw/local", 1);
+   
+   mavros_msgs::PositionTarget pos_tar;
+    pos_tar.header.stamp = ros::Time::now();
+    pos_tar.header.frame_id = "base_link";
+    // We will ignore everything except for YAW_RATE and velocities in X, Y, and Z
+    pos_tar.type_mask = mavros_msgs::PositionTarget::IGNORE_PX
+            | mavros_msgs::PositionTarget::IGNORE_PY
+            | mavros_msgs::PositionTarget::IGNORE_PZ
+            | mavros_msgs::PositionTarget::IGNORE_AFX
+            | mavros_msgs::PositionTarget::IGNORE_AFY
+            | mavros_msgs::PositionTarget::IGNORE_AFZ
+            | mavros_msgs::PositionTarget::FORCE
+            | mavros_msgs::PositionTarget::IGNORE_YAW;
+   // This makes it so our velocities are sent in the UAV frame. If you use FRAME_LOCAL_NED then it will be in map frame
+   pos_tar.coordinate_frame = mavros_msgs::PositionTarget::FRAME_BODY_NED;
+   
+   // Set the velocities we want (it is in m/s)
+   pos_tar.velocity.x = 0.3;
+   pos_tar.velocity.y = 0.0;
+   pos_tar.velocity.z = 0.1;
+   // Set the yaw rate (it is in rad/s)
+   pos_tar.yaw_rate = 0.1;
+   
+   ros::Rate r(20); // 20 hz
+   while (ros::ok())
+   {
+     pub.publish(pos_tar);
+     r.sleep();
+   }
+}
+```
