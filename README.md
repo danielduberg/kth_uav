@@ -4,7 +4,8 @@
 1. You are running `Ubuntu 16.04`
 2. You are using `bash`
 3. You have installed `ros-kinetic-desktop-full` (otherwise follow this guide: [http://wiki.ros.org/kinetic/Installation/Ubuntu] and install `ros-kinetic-desktop-full`)
-4. You are using `catkin build` instead of `catkin_make`
+4. You have created a ROS workspace (see: [http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment], but do not run `catkin_make`).
+5. You are using `catkin build` instead of `catkin_make`
    1. If you have not used `catkin build` before, then read this: [http://catkin-tools.readthedocs.io/en/latest/verbs/catkin_build.html]
 
 ## Prerequisites
