@@ -33,8 +33,8 @@
     | `/mavros/local_position/pose`        | Get pose of the UAV. |
     | `/mavros/local_position/velocity`    | Get velocity in map frame. |
     | `/mavros/mocap/pose`                 | Send your estimate of the pose of the UAV. |
-    | `/mavros/setpoint_raw/local`         | The prefered (by me) topic to publish positions, velocities, and accelerations to the UAV. From my experience you can only send one of the three at the same time. You can specify which frame the message is in, which makes it possible to give velocity in UAV frame instead of map frame. Only use the non-OFFSET frames, OFFSET is not working with `px4`. |
-    | `/mavros/setpoint_velocity/cmd_vel`  | Can be used to send velocities. But I prefer the above one instead since it is easier to switch to sending positions if you find that better later on. With the above you can also specify the frame, which you can not here. |
+    | `/mavros/setpoint_raw/local`         | The prefered (by me) topic to publish positions, velocities, and accelerations to the UAV. From my experience you can only send one of the three at the same time. You can specify which frame the message is in, which makes it possible to give velocity in UAV frame instead of map frame. Only use the non-OFFSET frames, OFFSET is not working with `px4`. On the real drone send a minimum of 0.3 m/s in x/y (except when you send 0.0 m/s). If the velocity is lower than 0.3 m/s then the UAV can move in any direction! |
+    | `/mavros/setpoint_velocity/cmd_vel`  | Can be used to send velocities. But I prefer the above one instead since it is easier to switch to sending positions if you find that better later on. With the above you can also specify the frame, which you can not here. On the real drone send a minimum of 0.3 m/s in x/y (except when you send 0.0 m/s). If the velocity is lower than 0.3 m/s then the UAV can move in any direction! |
     | `/mavros/setpoint_position/local`    | Can be used to send positions. Once again I prefer `/mavros/setpoint_raw/local` over this. |
     
 3. Here is a list of some of the most interesting services:
@@ -90,10 +90,13 @@ int main(int argc, char** argv)
             | mavros_msgs::PositionTarget::IGNORE_AFZ
             | mavros_msgs::PositionTarget::FORCE
             | mavros_msgs::PositionTarget::IGNORE_YAW;
-   // This makes it so our velocities are sent in the UAV frame. If you use FRAME_LOCAL_NED then it will be in map frame
+   // This makes it so our velocities are sent in the UAV frame.
+   // If you use FRAME_LOCAL_NED then it will be in map frame
    pos_tar.coordinate_frame = mavros_msgs::PositionTarget::FRAME_BODY_NED;
    
    // Set the velocities we want (it is in m/s)
+   // On the real drone send a minimum of 0.3 m/s in x/y (except when you send 0.0 m/s).
+   // If the velocity is lower than 0.3 m/s then the UAV can move in any direction!
    pos_tar.velocity.x = 0.3;
    pos_tar.velocity.y = 0.0;
    pos_tar.velocity.z = 0.1;
