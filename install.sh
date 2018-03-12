@@ -27,5 +27,8 @@ sudo $CURRENT_FILE_PATH/mavros/mavros/scripts/install_geographiclib_datasets.sh
 addToBashrc "# Load the kth_uav bash file"
 addToBashrc "source $CURRENT_FILE_PATH/.bashrc"
 
+chmod +x $CURRENT_FILE_PATH/mavros/mavros/scripts/install_geographiclib_datasets.sh
+sudo ./$CURRENT_FILE_PATH/mavros/mavros/scripts/install_geographiclib_datasets.sh
+
 cd $CURRENT_FILE_PATH/Firmware
 make posix_sitl_default gazebo
